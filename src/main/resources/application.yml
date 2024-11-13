@@ -1,0 +1,30 @@
+spring:
+  # H2 Database 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: 'jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE'   # H2 DB 연결 주소 (In-Memory Mode)
+#    url: 'jdbc:h2:~/expert'    # H2 DB 연결 주소 (Embedded Mode)
+    username: root        # H2 DB 접속 ID (사용자 지정)
+    password: { password }   # H2 DB 접속 PW (사용자 지정)
+    url: jdbc:mysql://localhost:3306/expert
+
+  jpa:
+    properties:
+      hibernate:
+#        dialect: org.hibernate.dialect.H2Dialect
+        hbm2ddl:
+          auto: update
+        show_sql: true             # SQL 쿼리 출력 활성화
+        format_sql: true           # SQL 쿼리 포맷팅 활성화
+        use_sql_comments: true     # SQL 쿼리에 주석 추가 활성화
+
+  # H2 Console 설정
+  h2:
+    console: # H2 DB를 웹에서 관리할 수 있는 기능
+      enabled: true           # H2 Console 사용 여부
+      path: /h2       # H2 Console 접속 주소
+
+# JWT 설정
+jwt:
+  secret:
+    key: 7Iqk7YyM66W07YOA7L2U65Sp7YG065+9U3ByaW5n6rCV7J2Y7Yqc7YSw7LWc7JuQ67mI7J6F64uI64ukLg==
