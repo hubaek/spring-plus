@@ -13,7 +13,7 @@ import static org.example.expert.domain.user.entity.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
-public class TodoRepositoryImpl implements TodoRepositoryCustom {
+public class TodoRepositoryCustomImpl implements TodoRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 
