@@ -50,9 +50,20 @@ dependencies {
     annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+//    // https://mvnrepository.com/artifact/net.datafaker/datafaker
+//    implementation group: 'net.datafaker', name: 'datafaker', version: '2.3.1'
+
+//    // elasticsearch
+//    implementation 'org.springframework.data:spring-data-elasticsearch:5.3.1'
+
+    // cache 추가
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
 }
 
 tasks.named('test') {
+    maxHeapSize = "2048m"
     useJUnitPlatform()
 }
 
