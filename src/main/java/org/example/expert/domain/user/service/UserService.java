@@ -7,12 +7,15 @@ import org.example.expert.domain.user.dto.request.UserChangePasswordRequest;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 //@Transactional(readOnly = true)
+@CacheConfig(cacheNames = "users")
 public class UserService {
 
     private final UserRepository userRepository;
@@ -22,7 +25,7 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
         return new UserResponse(user.getId(), user.getEmail());
     }
-
+    @Cacheable(key = "#nickname", unless = "#result == null ")
     public UserResponse getUserByNickname(String nickname) {
         User user = userRepository.findByNickname(nickname);
         return new UserResponse(user.getId(), user.getEmail());
