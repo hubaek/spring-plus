@@ -20,9 +20,14 @@ public class UserController {
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
-    @GetMapping("/users")
+    @GetMapping("/v1/users")
     public ResponseEntity<UserResponse> getUserByNickname(@RequestParam String nickname) {
         return ResponseEntity.ok(userService.getUserByNickname(nickname));
+    }
+
+    @GetMapping("/v2/users")
+    public ResponseEntity<UserResponse> getCachedUserByNickname(@RequestParam String nickname) {
+        return ResponseEntity.ok(userService.getCachedUserByNickname(nickname));
     }
 
     @PutMapping("/users")

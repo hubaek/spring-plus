@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-//@Transactional(readOnly = true)
 @CacheConfig(cacheNames = "users")
 public class UserService {
 
@@ -25,8 +24,15 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow(() -> new InvalidRequestException("User not found"));
         return new UserResponse(user.getId(), user.getEmail());
     }
-    @Cacheable(key = "#nickname", unless = "#result == null ")
+
     public UserResponse getUserByNickname(String nickname) {
+        User user = userRepository.findByNickname(nickname);
+        return new UserResponse(user.getId(), user.getEmail());
+    }
+
+
+    @Cacheable(key = "#nickname", unless = "#result == null ")
+    public UserResponse getCachedUserByNickname(String nickname) {
         User user = userRepository.findByNickname(nickname);
         return new UserResponse(user.getId(), user.getEmail());
     }
